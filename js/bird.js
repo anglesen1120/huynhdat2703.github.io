@@ -9,12 +9,12 @@ BIRD_IMG_3.src = 'img/bird_down.png';
 var birds = [BIRD_IMG_1, BIRD_IMG_2, BIRD_IMG_3];
 var BIRD_FRAME = 0;
 var SPEED = 0;
-var bird_X = 34;
-var bird_Y = 100;
-var acceleration = 0.2; 
+var bird_X = 20;
+var bird_Y = 200;
+var accelerationDown = 0;
 
 class Bird {
-    constructor (game){
+    constructor(game) {
         this.game = game;
     }
 
@@ -26,33 +26,51 @@ class Bird {
         this.checkFrameOfBird();
         this.autoFallen();
         this.birdFly();
-        this.draw();
     }
 
     autoFallen = function () {
-        acceleration += 0.3;
-        bird_Y += acceleration;
+        accelerationDown += 0.3;
+        bird_Y += accelerationDown;
+        this.draw();
     }
 
     checkFrameOfBird = function () {
-        if( SPEED >= 30) {
+        if (SPEED >= 30) {
             SPEED = 0;
         }
-        if(SPEED % 10 === 0) {
+        if (SPEED % 10 === 0) {
             BIRD_FRAME++;
         }
-        if(BIRD_FRAME >= 3){
+        if (BIRD_FRAME >= 3) {
             BIRD_FRAME = 0;
         }
         SPEED += 2;
     }
 
-    birdFly = function name() {
-        canvas.addEventListener('click', function() {
-            bird_Y -= 2;
-            acceleration = 0.2;
-            console.log(bird_Y, acceleration);
-            
-        }, false);
+    birdFly = function () {
+        this.game.canvas.onclick = function () {
+            if (bird_Y <= 22) {
+                accelerationDown = 0;
+                return;
+            }
+            accelerationDown = -4;
+        }
     }
+
+    touchPipe = function () {
+        if(bird_Y >= 395) {
+            return true;
+        }
+        else if (
+                (bird_X + 32 >= pipe_X) &&
+                (bird_X + 32 <= (pipe_X + 52)) &&
+                (bird_Y + 22 >= pipe_Y)
+            ) 
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
 }

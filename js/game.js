@@ -7,6 +7,7 @@ var bg = new Bg(this);
 var base = new Base(this);
 var bird = new Bird(this);
 var pipe = new Pipe(this);
+var score = new Score(this);
 
 class Game {
     constructor() {
@@ -20,11 +21,6 @@ class Game {
         document.body.appendChild(canvas);
         canvas.width = this.width;
         canvas.height = this.height;
-
-        bg.draw();
-        base.draw();
-        bird.draw();
-        pipe.draw();
     }
 
     init = function () {
@@ -34,21 +30,20 @@ class Game {
 }
 
 function loopGame() {
-    
     bg.update();
+    score.update();
     pipe.update();
     base.update();
     bird.update();
     if(isStop()) {
+        ctx.drawImage(GAMEOVER_IMG, canvas.width/2 - 100, canvas.height/2 - 200);
         return;
     }
     window.requestAnimationFrame(this.loopGame);
-    // setTimeout(loopGame, 33);
 }
 
 function isStop() {
-    if(bird_Y >= 370) {
-        ctx.drawImage(GAMEOVER_IMG, canvas.width/2 - 100, canvas.height/2 - 50);
+    if(bird.touchPipe()) {
         return true;
     }
     else {

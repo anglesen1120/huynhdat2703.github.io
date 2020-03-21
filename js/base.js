@@ -8,12 +8,12 @@ class Base {
     }
 
     draw = function () {
-        this.game.ctx.drawImage(BASE_IMG, base_x, 400);
-        this.game.ctx.drawImage(BASE_IMG, base_x + 336, 400);
+        this.game.ctx.drawImage(BASE_IMG, base_x, 420);
+        this.game.ctx.drawImage(BASE_IMG, base_x + 336, 420);
     }
 
     update = function () {
-        base_x--;
+        base_x-= 2;
         if(base_x <= -336){
             base_x = 0;
         }

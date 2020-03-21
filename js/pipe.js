@@ -10,14 +10,14 @@ class Pipe {
 
     draw = function () {
         this.game.ctx.drawImage(PIPE_IMG, pipe_X, pipe_Y);
-        // this.game.ctx.drawImage(PIPE_IMG, pipe_X + 336, 400);
     }
 
     update = function () {
-        pipe_X -= 2;
-        if(pipe_X <= -10){
+        if(pipe_X <= -52){
             pipe_X = 290;
+            pipe_Y = randomPipeY();
         }
+        pipe_X -= 2;
         this.draw();
     }
 }
