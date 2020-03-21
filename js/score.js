@@ -11,23 +11,34 @@ class Score {
         this.game = game;
     }
 
-    draw = function () {
-        if (currentScore <= 9) {
-            this.game.ctx.drawImage(imgScore[currentScore], 120, 15);
-        }
-        else if (currentScore <= 99) {
-            let hangChuc = Math.floor(currentScore / 10);
-            let donVi = currentScore % 10
-            this.game.ctx.drawImage(imgScore[hangChuc], 108, 15);
-            this.game.ctx.drawImage(imgScore[donVi], 132, 15);
-        }
+draw = function () {
+    if (currentScore <= 9) {
+        this.game.ctx.drawImage(imgScore[currentScore], 120, 15);
+    }
+    else if (currentScore <= 99) {
+        let hangChuc = Math.floor(currentScore / 10);
+        let donVi = currentScore % 10
+
+        this.game.ctx.drawImage(imgScore[hangChuc], 108, 15);
+        this.game.ctx.drawImage(imgScore[donVi], 132, 15);
     }
 
-    update = function () {
-        if (pipe_X <= -52) {
-            currentScore++;
-            this.draw();
-        }
+    else if (currentScore <= 999) {
+        let hangTram = Math.floor(currentScore / 100);
+        let hangChuc = Math.floor(currentScore % 100 / 10);
+        let donVi = Math.floor((currentScore % 100) % 10);
+
+        this.game.ctx.drawImage(imgScore[hangTram], 96, 15);
+        this.game.ctx.drawImage(imgScore[hangChuc], 120, 15);
+        this.game.ctx.drawImage(imgScore[donVi], 144, 15);
+    }
+}
+
+update = function () {
+    if (pipe_X <= -52) {
+        currentScore++;
         this.draw();
     }
+    this.draw();
+}
 }

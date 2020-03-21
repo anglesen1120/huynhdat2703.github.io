@@ -23,5 +23,5 @@ class Pipe {
 }
 
 function randomPipeY() {
-    return Math.floor(Math.random() * (320 - 120) + 120);
+    return Math.floor(Math.random() * (320 - 100) + 100);
 }

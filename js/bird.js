@@ -63,10 +63,13 @@ class Bird {
         }
         else if (
                 (bird_X + 32 >= pipe_X) &&
-                (bird_X + 32 <= (pipe_X + 52)) &&
+                (bird_X + 32 <= (pipe_X + 80)) &&
                 (bird_Y + 22 >= pipe_Y)
             ) 
         {
+            return true;
+        }
+        else if(currentScore >= 1000) {
             return true;
         }
         else {
